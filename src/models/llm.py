@@ -1,4 +1,4 @@
-"""真实 LLM 模型（OpenAI 兼容 chat/completions，标准库 urllib，未实跑）。"""
+"""真实 LLM 模型（OpenAI 兼容 chat/completions，标准库 urllib）。"""
 import json
 import os
 import urllib.request
@@ -26,7 +26,6 @@ class LLMModel(Model):
                 {"role": "system", "content": SYSTEM_PROMPT},
                 {"role": "user", "content": self._build_prompt(observation, tools_schema)},
             ],
-            "temperature": 0,
         }).encode("utf-8")
 
         req = urllib.request.Request(

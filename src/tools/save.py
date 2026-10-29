@@ -2,9 +2,22 @@
 import hashlib
 import json
 
+from ..planner import DEFAULT_TOOL_IDS
+
+
+def _normalize_plan(plan):
+    p = dict(plan or {})
+    if not p.get("material_ids") and p.get("materials"):
+        p["material_ids"] = [
+            m["id"] for m in p["materials"] if isinstance(m, dict) and m.get("id")
+        ]
+    if not p.get("tool_ids"):
+        p["tool_ids"] = list(DEFAULT_TOOL_IDS)
+    return p
+
 
 def save_plan(args, catalog):
-    plan = args.get("plan") or {}
+    plan = _normalize_plan(args.get("plan"))
     key = json.dumps({
         "topic": plan.get("topic"),
         "material_ids": plan.get("material_ids"),

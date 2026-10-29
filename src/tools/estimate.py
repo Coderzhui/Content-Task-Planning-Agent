@@ -1,9 +1,10 @@
 """成本估算工具（费用 + 耗时，显式传 budget / deadline_hours）。"""
+from ..planner import DEFAULT_TOOL_IDS
 
 
 def estimate_cost(args, catalog):
     material_ids = args.get("material_ids") or []
-    tool_ids = args.get("tool_ids") or []
+    tool_ids = args.get("tool_ids") or DEFAULT_TOOL_IDS
     budget = args.get("budget")
     deadline_hours = args.get("deadline_hours")
 

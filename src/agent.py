@@ -64,13 +64,14 @@ def run_agent(request, model, catalog, max_steps=MAX_STEPS, resume_state=None,
                 state.total_hours = result["data"]["total_hours"]
             if action.tool == "save_plan" and result["ok"]:
                 data = result["data"]
+                plan = data["plan"]
                 state.saved_plan = {
                     "plan_id": data["plan_id"],
-                    "topic": data["plan"]["topic"],
-                    "material_ids": data["plan"]["material_ids"],
-                    "tool_ids": data["plan"]["tool_ids"],
-                    "total_cost": data["plan"]["total_cost"],
-                    "total_hours": data["plan"]["total_hours"],
+                    "topic": plan["topic"],
+                    "material_ids": plan.get("material_ids"),
+                    "tool_ids": plan.get("tool_ids"),
+                    "total_cost": state.total_cost,
+                    "total_hours": state.total_hours,
                 }
 
         state.status = "incomplete"
