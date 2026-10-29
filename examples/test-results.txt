@@ -1,0 +1,29 @@
+test_budget_overrun_switches (test_agent.AgentTests) ... ok
+test_no_feasible_plan (test_agent.AgentTests) ... ok
+test_non_retryable_failure_stops (test_agent.AgentTests) ... ok
+test_normal_within_budget (test_agent.AgentTests) ... ok
+test_step_limit (test_agent.AgentTests) ... ok
+test_tool_failure_retry_keeps_success (test_agent.AgentTests) ... ok
+test_bad_json_file (test_cli.CliTests) ... ok
+test_missing_budget (test_cli.CliTests) ... ok
+test_normal (test_cli.CliTests) ... ok
+test_estimate_updates_step_cost (test_state.StateTests) ... ok
+test_record_success_and_failed (test_state.StateTests) ... ok
+test_roundtrip (test_state.StateTests) ... ok
+test_estimate_premium_over_budget (test_tools.ToolTests) ... ok
+test_estimate_standard_within_budget (test_tools.ToolTests) ... ok
+test_estimate_unknown_id (test_tools.ToolTests) ... ok
+test_injection_failure_then_success (test_tools.ToolTests) ... ok
+test_save_idempotent (test_tools.ToolTests) ... ok
+test_search (test_tools.ToolTests) ... ok
+test_bad_budget (test_validate.ValidateTests) ... ok
+test_bad_deadline (test_validate.ValidateTests) ... ok
+test_missing_budget (test_validate.ValidateTests) ... ok
+test_missing_deadline (test_validate.ValidateTests) ... ok
+test_not_dict (test_validate.ValidateTests) ... ok
+test_valid (test_validate.ValidateTests) ... ok
+
+----------------------------------------------------------------------
+Ran 24 tests in 0.025s
+
+OK

@@ -1,0 +1,8 @@
+{
+  "topic": "新品上线内容活动",
+  "budget": 15,
+  "deadline_hours": 20,
+  "fail_injections": [
+    {"tool": "generate_script", "on_call": 1, "retryable": true}
+  ]
+}

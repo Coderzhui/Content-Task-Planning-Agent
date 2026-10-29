@@ -1,0 +1,9 @@
+{
+  "status": "needs_input",
+  "missing": [
+    "budget"
+  ],
+  "trace": [
+    "validate"
+  ]
+}

@@ -1,0 +1,294 @@
+{
+  "status": "completed",
+  "topic": "新品上线内容活动",
+  "budget": 15,
+  "deadline_hours": 20,
+  "plan": {
+    "steps": [
+      {
+        "id": "step_1",
+        "name": "search_material",
+        "tool": "search_material",
+        "params": {
+          "topic": "新品上线内容活动"
+        },
+        "status": "success",
+        "result": {
+          "materials": [
+            {
+              "id": "mat_premium",
+              "name": "高端定制素材",
+              "cost": 9,
+              "hours": 6
+            },
+            {
+              "id": "mat_standard",
+              "name": "标准素材",
+              "cost": 5,
+              "hours": 4
+            }
+          ]
+        },
+        "cost": 0.0,
+        "hours": 0.0,
+        "error": null
+      },
+      {
+        "id": "step_2",
+        "name": "generate_script",
+        "tool": "generate_script",
+        "params": {
+          "topic": "新品上线内容活动",
+          "material_ids": [
+            "mat_premium"
+          ]
+        },
+        "status": "success",
+        "result": {
+          "script": "围绕「新品上线内容活动」的内容活动脚本，使用素材：高端定制素材",
+          "material_ids": [
+            "mat_premium"
+          ]
+        },
+        "cost": 0.0,
+        "hours": 0.0,
+        "error": null
+      },
+      {
+        "id": "step_3",
+        "name": "estimate_cost",
+        "tool": "estimate_cost",
+        "params": {
+          "material_ids": [
+            "mat_premium"
+          ],
+          "tool_ids": [
+            "tool_script",
+            "tool_design"
+          ],
+          "budget": 15,
+          "deadline_hours": 20
+        },
+        "status": "success",
+        "result": {
+          "total_cost": 12,
+          "total_hours": 9,
+          "over_budget": false,
+          "over_deadline": false
+        },
+        "cost": 12,
+        "hours": 9,
+        "error": null
+      },
+      {
+        "id": "step_4",
+        "name": "save_plan",
+        "tool": "save_plan",
+        "params": {
+          "plan": {
+            "topic": "新品上线内容活动",
+            "material_ids": [
+              "mat_premium"
+            ],
+            "tool_ids": [
+              "tool_script",
+              "tool_design"
+            ],
+            "script": "围绕「新品上线内容活动」的内容活动脚本，使用素材：高端定制素材",
+            "total_cost": 12,
+            "total_hours": 9
+          }
+        },
+        "status": "success",
+        "result": {
+          "plan_id": "17e2c195fa06",
+          "saved": true,
+          "plan": {
+            "topic": "新品上线内容活动",
+            "material_ids": [
+              "mat_premium"
+            ],
+            "tool_ids": [
+              "tool_script",
+              "tool_design"
+            ],
+            "script": "围绕「新品上线内容活动」的内容活动脚本，使用素材：高端定制素材",
+            "total_cost": 12,
+            "total_hours": 9
+          }
+        },
+        "cost": 0.0,
+        "hours": 0.0,
+        "error": null
+      }
+    ]
+  },
+  "tool_results": [
+    {
+      "tool": "search_material",
+      "args": {
+        "topic": "新品上线内容活动"
+      },
+      "ok": true,
+      "summary": {
+        "material_ids": [
+          "mat_premium",
+          "mat_standard"
+        ]
+      }
+    },
+    {
+      "tool": "generate_script",
+      "args": {
+        "topic": "新品上线内容活动",
+        "material_ids": [
+          "mat_premium"
+        ]
+      },
+      "ok": true,
+      "summary": {
+        "script": "围绕「新品上线内容活动」的内容活动脚本，使用素材：高端定制素材",
+        "material_ids": [
+          "mat_premium"
+        ]
+      }
+    },
+    {
+      "tool": "estimate_cost",
+      "args": {
+        "material_ids": [
+          "mat_premium"
+        ],
+        "tool_ids": [
+          "tool_script",
+          "tool_design"
+        ],
+        "budget": 15,
+        "deadline_hours": 20
+      },
+      "ok": true,
+      "summary": {
+        "total_cost": 12,
+        "total_hours": 9,
+        "over_budget": false,
+        "over_deadline": false
+      }
+    },
+    {
+      "tool": "save_plan",
+      "args": {
+        "plan": {
+          "topic": "新品上线内容活动",
+          "material_ids": [
+            "mat_premium"
+          ],
+          "tool_ids": [
+            "tool_script",
+            "tool_design"
+          ],
+          "script": "围绕「新品上线内容活动」的内容活动脚本，使用素材：高端定制素材",
+          "total_cost": 12,
+          "total_hours": 9
+        }
+      },
+      "ok": true,
+      "summary": {
+        "plan_id": "17e2c195fa06"
+      }
+    }
+  ],
+  "total_cost": 12,
+  "total_hours": 9,
+  "saved_plan": {
+    "plan_id": "17e2c195fa06",
+    "topic": "新品上线内容活动",
+    "material_ids": [
+      "mat_premium"
+    ],
+    "tool_ids": [
+      "tool_script",
+      "tool_design"
+    ],
+    "total_cost": 12,
+    "total_hours": 9
+  },
+  "reason": null,
+  "trace": [
+    {
+      "step": 1,
+      "action": "search_material",
+      "args": {
+        "topic": "新品上线内容活动"
+      },
+      "result_summary": {
+        "material_ids": [
+          "mat_premium",
+          "mat_standard"
+        ]
+      },
+      "decision": "继续下一步"
+    },
+    {
+      "step": 2,
+      "action": "generate_script",
+      "args": {
+        "topic": "新品上线内容活动",
+        "material_ids": [
+          "mat_premium"
+        ]
+      },
+      "result_summary": {
+        "script": "围绕「新品上线内容活动」的内容活动脚本，使用素材：高端定制素材",
+        "material_ids": [
+          "mat_premium"
+        ]
+      },
+      "decision": "继续下一步"
+    },
+    {
+      "step": 3,
+      "action": "estimate_cost",
+      "args": {
+        "material_ids": [
+          "mat_premium"
+        ],
+        "tool_ids": [
+          "tool_script",
+          "tool_design"
+        ],
+        "budget": 15,
+        "deadline_hours": 20
+      },
+      "result_summary": {
+        "total_cost": 12,
+        "total_hours": 9,
+        "over_budget": false,
+        "over_deadline": false
+      },
+      "decision": "预算内，准备保存"
+    },
+    {
+      "step": 4,
+      "action": "save_plan",
+      "args": {
+        "plan": {
+          "topic": "新品上线内容活动",
+          "material_ids": [
+            "mat_premium"
+          ],
+          "tool_ids": [
+            "tool_script",
+            "tool_design"
+          ],
+          "script": "围绕「新品上线内容活动」的内容活动脚本，使用素材：高端定制素材",
+          "total_cost": 12,
+          "total_hours": 9
+        }
+      },
+      "result_summary": {
+        "plan_id": "17e2c195fa06"
+      },
+      "decision": "方案已保存"
+    }
+  ]
+}
