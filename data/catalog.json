@@ -1,0 +1,10 @@
+{
+  "materials": [
+    {"id": "mat_premium", "name": "高端定制素材", "cost": 9, "hours": 6},
+    {"id": "mat_standard", "name": "标准素材", "cost": 5, "hours": 4}
+  ],
+  "tools": [
+    {"id": "tool_script", "name": "脚本生成", "cost": 1, "hours": 1},
+    {"id": "tool_design", "name": "视觉设计", "cost": 2, "hours": 2}
+  ]
+}
