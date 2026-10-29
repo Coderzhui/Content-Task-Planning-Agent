@@ -37,6 +37,12 @@ class AgentTests(unittest.TestCase):
         self.assertEqual(r["total_cost"], 8)
         self.assertEqual(r["saved_plan"]["material_ids"], ["mat_standard"])
 
+    def test_over_deadline_switches(self):
+        r = run_agent(req(budget=20, deadline_hours=8), OfflineMockModel(), CATALOG)
+        self.assertEqual(r["status"], "completed")
+        self.assertEqual(r["total_hours"], 7)
+        self.assertEqual(r["saved_plan"]["material_ids"], ["mat_standard"])
+
     def test_tool_failure_retry_keeps_success(self):
         r = run_agent(req(budget=15, fail_injections=[{"tool": "generate_script", "on_call": 1, "retryable": True}]),
                       OfflineMockModel(), CATALOG)

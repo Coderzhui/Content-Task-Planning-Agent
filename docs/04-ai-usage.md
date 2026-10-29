@@ -7,8 +7,8 @@
 | 阶段 | AI 贡献 | 验证方式 |
 |---|---|---|
 | 需求/方案/计划 | 起草 `ANALYSIS.md`、`docs/02-solution.md`、`PLAN.md` | 对照 `question.md` 检查需求与验收点覆盖 |
-| 代码 | 实现 `src/`（校验/目录/状态/工具/模型双入口/ReAct 引擎/CLI，含 `--resume` 续跑） | 28 项 unittest 全部通过 |
-| 测试 | 生成 tests/* 与 5 组 examples 输入/输出 | `python -m unittest discover -s tests -v` |
+| 代码 | 实现 `src/`（校验/目录/状态/工具/模型双入口/ReAct 引擎/CLI，含 `--resume` 续跑） | 29 项 unittest 全部通过 |
+| 测试 | 生成 tests/* 与多组 examples 输入/输出 | `python -m unittest discover -s tests -v` |
 | 结果 | 写入实际运行输出与 `test-results.txt` | 与输入逐项对应 |
 
 ## 关键设计决策与个人修改记录
@@ -30,9 +30,9 @@
 
 | 改动 | 原因 | 验证 |
 |---|---|---|
-| `summarize()` 只暴露业务字段 | AI 初稿把整个 `state.input`（含 `fail_injections` 测试注入项）喂给模型，会向真实 LLM 泄露测试细节 | 手写过滤为 `topic/budget/deadline_hours`；新增 `test_summarize_hides_fail_injections`，28 项测试通过 |
+| `summarize()` 只暴露业务字段 | AI 初稿把整个 `state.input`（含 `fail_injections` 测试注入项）喂给模型，会向真实 LLM 泄露测试细节 | 手写过滤为 `topic/budget/deadline_hours`；新增 `test_summarize_hides_fail_injections`，29 项测试通过 |
 
 ## 验证结论
 
-- 离线 Mock 只验证流程与状态机制；真实模型决策效果已通过 DeepSeek 实跑验证，三条路径记录于 `examples/llm-*.output.json`、`docs/03-evaluation.md`。
+- 离线 Mock 只验证流程与状态机制；真实模型决策效果已通过 DeepSeek 实跑验证，多条路径记录于 `examples/llm-*.output.json`、`docs/03-evaluation.md`。
 - 本文件不替代候选人的真实贡献说明，最终提交前需补齐「个人贡献」列。

@@ -12,6 +12,7 @@ python -m src.main --input examples/missing.input.json
 python -m src.main --input examples/tool-failure.input.json
 python -m src.main --input examples/budget-overrun.input.json
 python -m src.main --input examples/no-feasible-plan.input.json
+python -m src.main --input examples/over-deadline.input.json
 python -m unittest discover -s tests -v
 
 # 失败续跑：先触发中断写 checkpoint，再 --resume 续跑
