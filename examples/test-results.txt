@@ -4,6 +4,7 @@ test_non_retryable_failure_stops (test_agent.AgentTests) ... ok
 test_normal_within_budget (test_agent.AgentTests) ... ok
 test_resume_skips_success_and_completes (test_agent.AgentTests) ... ok
 test_step_limit (test_agent.AgentTests) ... ok
+test_summarize_hides_fail_injections (test_agent.AgentTests) ... ok
 test_tool_failure_retry_keeps_success (test_agent.AgentTests) ... ok
 test_bad_json_file (test_cli.CliTests) ... ok
 test_missing_budget (test_cli.CliTests) ... ok
@@ -27,6 +28,6 @@ test_not_dict (test_validate.ValidateTests) ... ok
 test_valid (test_validate.ValidateTests) ... ok
 
 ----------------------------------------------------------------------
-Ran 27 tests in 0.042s
+Ran 28 tests in 0.047s
 
 OK

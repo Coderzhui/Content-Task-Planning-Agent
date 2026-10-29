@@ -1,7 +1,7 @@
 import unittest
 
 from src.catalog import Catalog
-from src.agent import run_agent
+from src.agent import run_agent, summarize
 from src.state import State
 from src.models.base import Action
 from src.models.offline_mock import OfflineMockModel
@@ -77,6 +77,12 @@ class AgentTests(unittest.TestCase):
         tools = [st["tool"] for st in r["plan"]["steps"]]
         self.assertEqual(tools.count("search_material"), 1)
         self.assertEqual(tools.count("generate_script"), 1)
+
+    def test_summarize_hides_fail_injections(self):
+        s = State(req(budget=15, fail_injections=[{"tool": "generate_script", "on_call": 1}]))
+        obs = summarize(s)
+        self.assertNotIn("fail_injections", obs["input"])
+        self.assertEqual(sorted(obs["input"].keys()), ["budget", "deadline_hours", "topic"])
 
 
 if __name__ == "__main__":
