@@ -29,7 +29,17 @@
 | 状态保留 | `State` 序列化往返测试通过 | 通过 |
 | 失败续跑保留成功结果 | `resume` 示例：search success 保留、generate failed 重试成功、estimate+save 补齐 | 通过 |
 
+## 真实 LLM 实跑记录（DeepSeek）
+
+`--model llm` 接 DeepSeek `deepseek-flash`，三条执行路径均 `completed`，运行记录见 `examples/llm-*.output.json`：
+
+| 场景 | 结果 | 决策要点 |
+|---|---|---|
+| `normal` | completed，total_cost=12（premium） | 预算内直接生成并保存 |
+| `budget-overrun` | completed，total_cost=8（standard） | 按预算约束选择低成本方案 |
+| `tool-failure` | completed，total_cost=8 | 先估算两素材=17 超预算→改选 standard=8；generate 注入失败→重试成功，保留成功步骤 |
+
 ## 已知限制
 
-- 真实 LLM 代码已实现但**未实跑**（无 API key）；本页只记录离线流程验证，不能证明真实模型决策效果。
+- 真实 LLM 已通过 DeepSeek 实跑验证（见上表）；本页离线 Mock 用例用于确定性复现流程与状态机制。
 - 失败步骤续跑已通过 `--checkpoint` / `--resume` 实现；示例与运行记录见 `examples/resume.*`。

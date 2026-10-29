@@ -270,6 +270,6 @@ python -m unittest discover -s tests -v
 
 ## 13. 已知边界
 
-- 真实 LLM 代码已实现但**未实跑**（当前无 API key）；示例 Trace 由离线 Mock 生成，文档如实标注「未验证真实模型决策效果」。
+- 真实 LLM 已用 DeepSeek `deepseek-flash` 实跑，`normal`/`budget-overrun`/`tool-failure` 三条路径均 `completed`（见 `examples/llm-*.output.json`）；离线 Mock 示例 Trace 仍保留用于确定性复现。
 - 素材/工具为合成数据，脚本生成为模板占位，不评估真实创意与合规质量。
 - 无持久化数据库与服务化，checkpoint 仅为本地文件，用于演示续跑机制。

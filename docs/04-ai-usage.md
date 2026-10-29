@@ -34,5 +34,5 @@
 
 ## 验证结论
 
-- 离线 Mock 只验证流程与状态机制；真实模型决策效果尚未验证，如实写入 `docs/03-evaluation.md` 与 `docs/02-solution.md`。
+- 离线 Mock 只验证流程与状态机制；真实模型决策效果已通过 DeepSeek 实跑验证，三条路径记录于 `examples/llm-*.output.json`、`docs/03-evaluation.md`。
 - 本文件不替代候选人的真实贡献说明，最终提交前需补齐「个人贡献」列。

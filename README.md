@@ -54,7 +54,7 @@ python -m src.main --resume examples/resume.checkpoint.json
 ## 模型接入
 
 - **离线 Mock（默认）**：`--model offline_mock`。确定性策略，只验证引擎循环与状态机制，**不构成真实 ReAct 决策证据**。
-- **真实 LLM**：`--model llm`，读取环境变量 `LLM_BASE_URL` / `LLM_API_KEY` / `LLM_MODEL`（OpenAI 兼容 `chat/completions`，标准库直连）。当前未实跑，边界见 `docs/02-solution.md`。
+- **真实 LLM**：`--model llm`，读取环境变量 `LLM_BASE_URL` / `LLM_API_KEY` / `LLM_MODEL`（OpenAI 兼容 `chat/completions`，标准库直连）。已用 DeepSeek 实跑，见 `examples/llm-*.output.json` 与 `docs/03-evaluation.md`。
 
 ## 已知边界
 
