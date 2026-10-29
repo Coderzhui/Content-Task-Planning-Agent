@@ -1,5 +1,5 @@
 """ReAct 引擎：循环、步数上限、观察构造、交付结果组装。"""
-from .state import State
+from .state import State, save_checkpoint
 from .tools import registry
 from .models.base import Action
 from .models.offline_mock import OfflineMockModel
@@ -20,48 +20,56 @@ def summarize(state):
     return {"input": state.input, "steps": state.steps, "last": last}
 
 
-def run_agent(request, model, catalog, max_steps=MAX_STEPS):
-    state = State(request)
-    call_counts = {}
+def run_agent(request, model, catalog, max_steps=MAX_STEPS, resume_state=None,
+              resume_call_counts=None, checkpoint_path=None):
+    state = resume_state if resume_state is not None else State(request)
+    call_counts = dict(resume_call_counts) if resume_call_counts is not None else {}
+    if resume_state is not None:
+        state.step_count = 0  # 续跑给满本轮流预算，已成功步骤保留
 
-    while state.step_count < max_steps:
-        observation = summarize(state)
-        try:
-            action = model.decide(observation, TOOL_SCHEMAS)
-        except Exception as exc:  # 真实 LLM 出错 -> 明确未完成
-            state.status = "incomplete"
-            state.reason = f"model_error: {exc}"
-            return build_deliverable(state)
-
-        if action.kind == "stop":
-            if state.saved_plan:
-                state.status = "completed"
-                state.reason = None
-            else:
+    try:
+        while state.step_count < max_steps:
+            observation = summarize(state)
+            try:
+                action = model.decide(observation, TOOL_SCHEMAS)
+            except Exception as exc:  # 真实 LLM 出错 -> 明确未完成
                 state.status = "incomplete"
-                state.reason = action.reason or "stopped_without_saving"
-            return build_deliverable(state)
+                state.reason = f"model_error: {exc}"
+                return build_deliverable(state)
 
-        result = registry.execute(action.tool, action.args, catalog, request["fail_injections"], call_counts)
-        state.record(action, result)
+            if action.kind == "stop":
+                if state.saved_plan:
+                    state.status = "completed"
+                    state.reason = None
+                else:
+                    state.status = "incomplete"
+                    state.reason = action.reason or "stopped_without_saving"
+                return build_deliverable(state)
 
-        if action.tool == "estimate_cost" and result["ok"]:
-            state.total_cost = result["data"]["total_cost"]
-            state.total_hours = result["data"]["total_hours"]
-        if action.tool == "save_plan" and result["ok"]:
-            data = result["data"]
-            state.saved_plan = {
-                "plan_id": data["plan_id"],
-                "topic": data["plan"]["topic"],
-                "material_ids": data["plan"]["material_ids"],
-                "tool_ids": data["plan"]["tool_ids"],
-                "total_cost": data["plan"]["total_cost"],
-                "total_hours": data["plan"]["total_hours"],
-            }
+            result = registry.execute(action.tool, action.args, catalog,
+                                      state.input["fail_injections"], call_counts)
+            state.record(action, result)
 
-    state.status = "incomplete"
-    state.reason = "step_limit_reached"
-    return build_deliverable(state)
+            if action.tool == "estimate_cost" and result["ok"]:
+                state.total_cost = result["data"]["total_cost"]
+                state.total_hours = result["data"]["total_hours"]
+            if action.tool == "save_plan" and result["ok"]:
+                data = result["data"]
+                state.saved_plan = {
+                    "plan_id": data["plan_id"],
+                    "topic": data["plan"]["topic"],
+                    "material_ids": data["plan"]["material_ids"],
+                    "tool_ids": data["plan"]["tool_ids"],
+                    "total_cost": data["plan"]["total_cost"],
+                    "total_hours": data["plan"]["total_hours"],
+                }
+
+        state.status = "incomplete"
+        state.reason = "step_limit_reached"
+        return build_deliverable(state)
+    finally:
+        if checkpoint_path:
+            save_checkpoint(checkpoint_path, state.to_dict(), call_counts)
 
 
 def build_deliverable(state):

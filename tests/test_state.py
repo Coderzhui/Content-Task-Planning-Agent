@@ -1,6 +1,8 @@
+import os
+import tempfile
 import unittest
 
-from src.state import State
+from src.state import State, save_checkpoint, load_checkpoint
 from src.models.base import Action
 
 
@@ -30,6 +32,21 @@ class StateTests(unittest.TestCase):
         s2 = State.from_dict(s.to_dict())
         self.assertEqual(s2.steps[0]["result"]["total_cost"], 8)
         self.assertEqual(s2.step_count, 1)
+
+    def test_checkpoint_roundtrip(self):
+        s = State({"topic": "t", "budget": 10, "deadline_hours": 20, "fail_injections": []})
+        s.record(Action("tool", "estimate_cost", {"material_ids": ["mat_standard"]}),
+                 {"ok": True, "data": {"total_cost": 8, "total_hours": 7}, "error": None, "retryable": None})
+        with tempfile.NamedTemporaryFile("w", suffix=".json", delete=False, encoding="utf-8") as f:
+            path = f.name
+        try:
+            save_checkpoint(path, s.to_dict(), {"generate_script": 1})
+            s2, cc = load_checkpoint(path)
+        finally:
+            os.unlink(path)
+        self.assertEqual(s2.step_count, 1)
+        self.assertEqual(s2.steps[0]["result"]["total_cost"], 8)
+        self.assertEqual(cc["generate_script"], 1)
 
 
 if __name__ == "__main__":

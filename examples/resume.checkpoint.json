@@ -1,0 +1,112 @@
+{
+  "state": {
+    "input": {
+      "topic": "新品上线内容活动",
+      "budget": 15,
+      "deadline_hours": 20,
+      "fail_injections": [
+        {
+          "tool": "generate_script",
+          "on_call": 1,
+          "retryable": true
+        }
+      ]
+    },
+    "steps": [
+      {
+        "id": "step_1",
+        "name": "search_material",
+        "tool": "search_material",
+        "params": {
+          "topic": "新品上线内容活动"
+        },
+        "status": "success",
+        "result": {
+          "materials": [
+            {
+              "id": "mat_premium",
+              "name": "高端定制素材",
+              "cost": 9,
+              "hours": 6
+            },
+            {
+              "id": "mat_standard",
+              "name": "标准素材",
+              "cost": 5,
+              "hours": 4
+            }
+          ]
+        },
+        "cost": 0.0,
+        "hours": 0.0,
+        "error": null
+      },
+      {
+        "id": "step_2",
+        "name": "generate_script",
+        "tool": "generate_script",
+        "params": {
+          "topic": "新品上线内容活动",
+          "material_ids": [
+            "mat_premium"
+          ]
+        },
+        "status": "failed",
+        "result": null,
+        "cost": 0.0,
+        "hours": 0.0,
+        "error": "injected generate_script failure"
+      }
+    ],
+    "total_cost": 0.0,
+    "total_hours": 0.0,
+    "observations": [
+      {
+        "tool": "search_material",
+        "args": {
+          "topic": "新品上线内容活动"
+        },
+        "ok": true,
+        "data": {
+          "materials": [
+            {
+              "id": "mat_premium",
+              "name": "高端定制素材",
+              "cost": 9,
+              "hours": 6
+            },
+            {
+              "id": "mat_standard",
+              "name": "标准素材",
+              "cost": 5,
+              "hours": 4
+            }
+          ]
+        },
+        "error": null,
+        "retryable": null
+      },
+      {
+        "tool": "generate_script",
+        "args": {
+          "topic": "新品上线内容活动",
+          "material_ids": [
+            "mat_premium"
+          ]
+        },
+        "ok": false,
+        "data": null,
+        "error": "injected generate_script failure",
+        "retryable": true
+      }
+    ],
+    "status": "incomplete",
+    "reason": "step_limit_reached",
+    "step_count": 2,
+    "saved_plan": null
+  },
+  "call_counts": {
+    "search_material": 1,
+    "generate_script": 1
+  }
+}

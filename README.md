@@ -13,6 +13,10 @@ python -m src.main --input examples/tool-failure.input.json
 python -m src.main --input examples/budget-overrun.input.json
 python -m src.main --input examples/no-feasible-plan.input.json
 python -m unittest discover -s tests -v
+
+# 失败续跑：先触发中断写 checkpoint，再 --resume 续跑
+python -m src.main --input examples/resume.input.json --max-steps 2 --checkpoint examples/resume.checkpoint.json
+python -m src.main --resume examples/resume.checkpoint.json
 ```
 
 - 成功输出 JSON 交付结果；业务异常以 JSON 状态返回；输入文件格式错误返回退出码 2。
@@ -55,4 +59,4 @@ python -m unittest discover -s tests -v
 ## 已知边界
 
 - 素材/工具为合成数据，脚本生成为模板占位，不评估真实创意与合规质量。
-- 失败步骤续跑（`--resume`）为待实现加分项。
+- 失败步骤续跑已通过 `--checkpoint` / `--resume` 实现，示例见 `examples/resume.*`。

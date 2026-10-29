@@ -2,7 +2,7 @@
 
 运行记录见 [test-results](../examples/test-results.txt)；输入/输出/ Trace 见 [examples/](../examples/)。
 
-自动化测试共 **24 项，全部通过**（`python -m unittest discover -s tests -v`）。
+自动化测试共 **27 项，全部通过**（`python -m unittest discover -s tests -v`）。
 
 ## 用例与验收点对照
 
@@ -16,6 +16,7 @@
 | 重复执行（测试） | 同 plan 两次 `save_plan` | plan_id 一致 | 通过 | 重复执行 |
 | 步数上限（测试） | max_steps=2 | `incomplete` + `step_limit_reached` | 通过 | 步数上限（硬性要求） |
 | 不可重试失败（测试） | retryable=false | `incomplete` + `tool_error` | 通过 | 工具失败边界 |
+| `resume` | 注入 generate 第 1 次失败 + max_steps=2 中断 | resume 后 `completed`；search 不重复、generate 重试成功 | 通过 | 失败续跑（加分） |
 
 ## 评审观察项
 
@@ -26,8 +27,9 @@
 | 注入失败后调整计划且保留成功结果 | `tool-failure` Trace：search success 保留，generate 失败后重试成功 | 通过 |
 | 合理重规划 | `budget-overrun` Trace：premium over → 改 standard | 通过 |
 | 状态保留 | `State` 序列化往返测试通过 | 通过 |
+| 失败续跑保留成功结果 | `resume` 示例：search success 保留、generate failed 重试成功、estimate+save 补齐 | 通过 |
 
 ## 已知限制
 
 - 真实 LLM 代码已实现但**未实跑**（无 API key）；本页只记录离线流程验证，不能证明真实模型决策效果。
-- 失败步骤续跑（`--resume`）为加分项，当前未实现。
+- 失败步骤续跑已通过 `--checkpoint` / `--resume` 实现；示例与运行记录见 `examples/resume.*`。

@@ -223,7 +223,7 @@ Action = {"kind": "tool" | "stop", "tool": str, "args": dict, "reason": str | No
 ## 10. 幂等与续跑
 
 - **幂等（重复执行）**：`save_plan` 以 `(topic + material_ids + tool_ids)` 的确定性哈希作 `plan_id`，同输入返回同一 id，不重复计费。
-- **失败续跑（加分项）**：每步后把 `State` 序列化到 checkpoint 文件，`--resume` 时跳过 `success` 步骤，仅重跑 `failed` / `pending`。
+- **失败续跑（加分项）**：`--checkpoint PATH` 在运行结束把 `State` 与工具调用计数 `call_counts` 序列化到文件；`--resume PATH` 恢复后 `step_count` 归零（给满本轮步数预算）并保留全部历史步骤，模型据此跳过 `success` 步骤、仅重跑 `failed`/`pending`。`call_counts` 一并持久化，避免 `fail_injections` 的 `on_call` 在续跑后重复注入。
 
 ---
 

@@ -2,6 +2,8 @@ import unittest
 
 from src.catalog import Catalog
 from src.agent import run_agent
+from src.state import State
+from src.models.base import Action
 from src.models.offline_mock import OfflineMockModel
 
 CATALOG = Catalog(
@@ -61,6 +63,20 @@ class AgentTests(unittest.TestCase):
         r = run_agent(req(budget=15), OfflineMockModel(), CATALOG, max_steps=2)
         self.assertEqual(r["status"], "incomplete")
         self.assertEqual(r["reason"], "step_limit_reached")
+
+    def test_resume_skips_success_and_completes(self):
+        s = State(req(budget=15))
+        s.record(Action("tool", "search_material", {"topic": "新品上线"}),
+                 {"ok": True, "data": {"materials": []}, "error": None, "retryable": None})
+        s.record(Action("tool", "generate_script", {"topic": "新品上线", "material_ids": ["mat_premium"]}),
+                 {"ok": True, "data": {"script": "x", "material_ids": ["mat_premium"]}, "error": None, "retryable": None})
+        r = run_agent(req(budget=15), OfflineMockModel(), CATALOG, resume_state=s)
+        self.assertEqual(r["status"], "completed")
+        self.assertEqual(r["total_cost"], 12)
+        self.assertEqual(r["saved_plan"]["material_ids"], ["mat_premium"])
+        tools = [st["tool"] for st in r["plan"]["steps"]]
+        self.assertEqual(tools.count("search_material"), 1)
+        self.assertEqual(tools.count("generate_script"), 1)
 
 
 if __name__ == "__main__":
