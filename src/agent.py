@@ -17,7 +17,16 @@ def build_model(kind="offline_mock", **kwargs):
 
 def summarize(state):
     last = state.observations[-1] if state.observations else None
-    return {"input": state.input, "steps": state.steps, "last": last}
+    view = {
+        "topic": state.input["topic"],
+        "budget": state.input["budget"],
+        "deadline_hours": state.input["deadline_hours"],
+    }
+    return {
+        "input": view,
+        "steps": state.steps,
+        "last": last
+    }
 
 
 def run_agent(request, model, catalog, max_steps=MAX_STEPS, resume_state=None,

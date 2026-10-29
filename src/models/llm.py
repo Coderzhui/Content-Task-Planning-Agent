@@ -17,7 +17,7 @@ class LLMModel(Model):
     def __init__(self, base_url=None, api_key=None, model=None):
         self.base_url = (base_url or os.getenv("LLM_BASE_URL", "")).rstrip("/")
         self.api_key = api_key or os.getenv("LLM_API_KEY", "")
-        self.model = model or os.getenv("LLM_MODEL", "gpt-4o-mini")
+        self.model = model or os.getenv("LLM_MODEL", "kimi-k2.6")
 
     def decide(self, observation, tools_schema):
         payload = json.dumps({

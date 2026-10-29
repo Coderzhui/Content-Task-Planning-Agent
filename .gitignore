@@ -1,6 +1,7 @@
 .vscode/
 __pycache__/
 *.py[cod]
+.env
 
 question.md
 ANALYSIS.md
