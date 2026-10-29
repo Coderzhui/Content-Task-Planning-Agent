@@ -1,0 +1,9 @@
+.vscode/
+__pycache__/
+*.py[cod]
+
+question.md
+ANALYSIS.md
+PLAN.md
+PROGRESS.md
+agent-campus-submission-example/
