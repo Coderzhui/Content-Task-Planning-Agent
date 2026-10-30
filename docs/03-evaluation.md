@@ -2,7 +2,7 @@
 
 运行记录见 [test-results](../examples/test-results.txt)；输入/输出/ Trace 见 [examples/](../examples/)。
 
-自动化测试共 **36 项，全部通过**（`python -m unittest discover -s tests -v`）。
+自动化测试共 **37 项，全部通过**（`python -m unittest discover -s tests -v`）。
 
 ## 用例与验收点对照
 
@@ -14,7 +14,7 @@
 | `budget-overrun` | budget=10 | 高端 12 over → 改标准 8 → `completed` | 通过 | 预算超限 |
 | `over-deadline` | budget=20, deadline_hours=8 | 高端 9h 超截止 → 改标准 7h → `completed` | 通过 | 超截止时间 |
 | `no-feasible-plan` | budget=5 | `incomplete` + `no_feasible_plan`，saved_plan=null | 通过 | 无可行方案（延伸） |
-| 重复执行（测试） | 同 plan 两次 `save_plan` | plan_id 一致 | 通过 | 重复执行 |
+| 重复执行（测试） | 同一输入跑两遍整个 agent（budget=10） | 状态、费用、plan_id、步骤轨迹一致 | 通过 | 重复执行 |
 | 步数上限（测试） | max_steps=2 | `incomplete` + `step_limit_reached` | 通过 | 步数上限（硬性要求） |
 | 不可重试失败（测试） | retryable=false | `incomplete` + `tool_error` | 通过 | 工具失败边界 |
 | `resume` | 注入 generate 第 1 次失败 + max_steps=2 中断 | resume 后 `completed`；search 不重复、generate 重试成功 | 通过 | 失败续跑（加分） |

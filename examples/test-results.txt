@@ -3,6 +3,7 @@ test_no_feasible_plan (test_agent.AgentTests) ... ok
 test_non_retryable_failure_stops (test_agent.AgentTests) ... ok
 test_normal_within_budget (test_agent.AgentTests) ... ok
 test_over_deadline_switches (test_agent.AgentTests) ... ok
+test_repeat_execution_idempotent (test_agent.AgentTests) ... ok
 test_resume_skips_success_and_completes (test_agent.AgentTests) ... ok
 test_save_plan_missing_topic_no_crash (test_agent.AgentTests) ... ok
 test_step_limit (test_agent.AgentTests) ... ok
@@ -36,6 +37,6 @@ test_not_dict (test_validate.ValidateTests) ... ok
 test_valid (test_validate.ValidateTests) ... ok
 
 ----------------------------------------------------------------------
-Ran 36 tests in 0.054s
+Ran 37 tests in 0.051s
 
 OK

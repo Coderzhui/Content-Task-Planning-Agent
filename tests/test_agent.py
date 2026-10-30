@@ -100,6 +100,15 @@ class AgentTests(unittest.TestCase):
         self.assertEqual(r["trace"][0]["decision"], "先检索可用素材")
         self.assertEqual(r["trace"][1]["decision"], "预算内，准备保存方案")
 
+    def test_repeat_execution_idempotent(self):
+        # 端到端重复执行：同一输入跑两遍，结果（状态/费用/plan_id/步骤轨迹）一致
+        r1 = run_agent(req(budget=10), OfflineMockModel(), CATALOG)
+        r2 = run_agent(req(budget=10), OfflineMockModel(), CATALOG)
+        self.assertEqual(r1["status"], r2["status"])
+        self.assertEqual(r1["total_cost"], r2["total_cost"])
+        self.assertEqual(r1["saved_plan"]["plan_id"], r2["saved_plan"]["plan_id"])
+        self.assertEqual(r1["plan"]["steps"], r2["plan"]["steps"])
+
 
 class SavePlanNoTopicModel(Model):
     def decide(self, observation, tools_schema):
