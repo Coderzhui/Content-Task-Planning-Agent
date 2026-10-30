@@ -2,6 +2,12 @@
 
 帮助运营人员在**预算**与**截止时间**双重约束下完成一份内容活动方案，并通过 ReAct 决策循环在**预算超限、工具失败、部分成功**时动态重规划、保留已成功步骤结果。
 
+## 提交信息
+
+- 题号：2
+- GitHub：https://github.com/Coderzhui/Content-Task-Planning-Agent
+- 实际用时：4-5 小时
+
 ## 快速运行
 
 Python 3.10+，标准库 only；离线 Mock 无需密钥。在仓库根目录执行：

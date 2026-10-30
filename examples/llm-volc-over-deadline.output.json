@@ -272,7 +272,7 @@
           "mat_standard"
         ]
       },
-      "decision": "继续下一步"
+      "decision": "先获取可用素材及其成本与耗时，再据此在预算和截止时间内筛选。"
     },
     {
       "step": 2,
@@ -295,7 +295,7 @@
         "over_budget": false,
         "over_deadline": true
       },
-      "decision": "超预算/超截止，改选更便宜的素材"
+      "decision": "先估算两种素材加脚本/设计工具的总费用与总耗时，判断是否在预算20和8小时内。"
     },
     {
       "step": 3,
@@ -317,7 +317,7 @@
         "over_budget": false,
         "over_deadline": false
       },
-      "decision": "预算内，准备保存"
+      "decision": "包含高端素材的总耗时为13小时，超过8小时截止；改用标准素材并重新估算，确认是否可在预算和截止时间内完成。"
     },
     {
       "step": 4,
@@ -334,7 +334,7 @@
           "mat_standard"
         ]
       },
-      "decision": "继续下一步"
+      "decision": "标准素材方案费用8、耗时7小时，满足预算20与8小时截止；先生成对应内容脚本。"
     },
     {
       "step": 5,
@@ -356,7 +356,7 @@
       "result_summary": {
         "plan_id": "6355c9de11ba"
       },
-      "decision": "方案已保存"
+      "decision": "标准素材方案费用8、耗时7小时，满足预算20与截止8小时；脚本已生成，保存最终方案。"
     }
   ]
 }

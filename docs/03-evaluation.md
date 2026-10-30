@@ -32,14 +32,14 @@
 
 ## 真实 LLM 实跑记录（DeepSeek）
 
-`--model llm` 接 DeepSeek `deepseek-flash`，三条执行路径均 `completed`，运行记录见 `examples/llm-*.output.json`：
+`--model llm` 接 DeepSeek `deepseek-flash`，四个场景均 `completed`，运行记录见 `examples/llm-*.output.json`：
 
 | 场景 | 结果 | 决策要点 |
 |---|---|---|
-| `normal` | completed，total_cost=12（premium） | 预算内直接生成并保存 |
+| `normal` | completed，total_cost=8（standard） | 先估双素材=17 超预算 → 改标准 8 |
 | `budget-overrun` | completed，total_cost=8（standard） | 按预算约束选择低成本方案 |
 | `over-deadline` | completed，total_cost=8（standard） | 高端 9h 超截止 → 改标准 7h |
-| `tool-failure` | completed，total_cost=8 | 先估算两素材=17 超预算→改选 standard=8；generate 注入失败→重试成功，保留成功步骤 |
+| `tool-failure` | completed，total_cost=12（premium） | generate 注入失败→重试成功，保留成功步骤 |
 
 ## 多模型决策一致性
 
@@ -47,9 +47,9 @@
 
 | 场景 | deepseek-flash | deepseek-v4.1-flash | 一致 |
 |---|---|---|---|
-| normal | premium=12 | premium=12 | ✅ |
+| normal | standard=8 | standard=8 | ✅ |
 | budget-overrun | standard=8 | standard=8 | ✅ |
-| tool-failure | standard=8（失败重试） | standard=8（失败重试） | ✅ |
+| tool-failure | premium=12（失败重试） | premium=12（失败重试） | ✅ |
 | over-deadline | standard=8（超截止改选） | standard=8（超截止改选） | ✅ |
 
 ## 已知限制

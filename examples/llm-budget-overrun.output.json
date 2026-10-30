@@ -35,27 +35,6 @@
       },
       {
         "id": "step_2",
-        "name": "generate_script",
-        "tool": "generate_script",
-        "params": {
-          "topic": "新品上线内容活动",
-          "material_ids": [
-            "mat_standard"
-          ]
-        },
-        "status": "success",
-        "result": {
-          "script": "围绕「新品上线内容活动」的内容活动脚本，使用素材：标准素材",
-          "material_ids": [
-            "mat_standard"
-          ]
-        },
-        "cost": 0.0,
-        "hours": 0.0,
-        "error": null
-      },
-      {
-        "id": "step_3",
         "name": "estimate_cost",
         "tool": "estimate_cost",
         "params": {
@@ -81,7 +60,7 @@
         "error": null
       },
       {
-        "id": "step_4",
+        "id": "step_3",
         "name": "save_plan",
         "tool": "save_plan",
         "params": {
@@ -131,22 +110,6 @@
       "summary": {
         "material_ids": [
           "mat_premium",
-          "mat_standard"
-        ]
-      }
-    },
-    {
-      "tool": "generate_script",
-      "args": {
-        "topic": "新品上线内容活动",
-        "material_ids": [
-          "mat_standard"
-        ]
-      },
-      "ok": true,
-      "summary": {
-        "script": "围绕「新品上线内容活动」的内容活动脚本，使用素材：标准素材",
-        "material_ids": [
           "mat_standard"
         ]
       }
@@ -223,27 +186,10 @@
           "mat_standard"
         ]
       },
-      "decision": "继续下一步"
+      "decision": "先检索可用素材，确认素材成本与耗时后再规划。"
     },
     {
       "step": 2,
-      "action": "generate_script",
-      "args": {
-        "topic": "新品上线内容活动",
-        "material_ids": [
-          "mat_standard"
-        ]
-      },
-      "result_summary": {
-        "script": "围绕「新品上线内容活动」的内容活动脚本，使用素材：标准素材",
-        "material_ids": [
-          "mat_standard"
-        ]
-      },
-      "decision": "继续下一步"
-    },
-    {
-      "step": 3,
       "action": "estimate_cost",
       "args": {
         "material_ids": [
@@ -262,10 +208,10 @@
         "over_budget": false,
         "over_deadline": false
       },
-      "decision": "预算内，准备保存"
+      "decision": "标准素材成本更低，先用脚本与设计工具估算总费用和耗时，确认是否满足预算与截止时间。"
     },
     {
-      "step": 4,
+      "step": 3,
       "action": "save_plan",
       "args": {
         "plan": {
@@ -284,7 +230,7 @@
       "result_summary": {
         "plan_id": "6355c9de11ba"
       },
-      "decision": "方案已保存"
+      "decision": "标准素材方案成本8、耗时7，均满足预算10和截止20，保存为最终方案。"
     }
   ]
 }

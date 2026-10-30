@@ -39,7 +39,8 @@
         "tool": "estimate_cost",
         "params": {
           "material_ids": [
-            "mat_premium"
+            "mat_premium",
+            "mat_standard"
           ],
           "tool_ids": [
             "tool_script",
@@ -50,30 +51,56 @@
         },
         "status": "success",
         "result": {
-          "total_cost": 12,
-          "total_hours": 9,
-          "over_budget": false,
+          "total_cost": 17,
+          "total_hours": 13,
+          "over_budget": true,
           "over_deadline": false
         },
-        "cost": 12,
-        "hours": 9,
+        "cost": 17,
+        "hours": 13,
         "error": null
       },
       {
         "id": "step_3",
+        "name": "estimate_cost",
+        "tool": "estimate_cost",
+        "params": {
+          "material_ids": [
+            "mat_standard"
+          ],
+          "tool_ids": [
+            "tool_script",
+            "tool_design"
+          ],
+          "budget": 15,
+          "deadline_hours": 20
+        },
+        "status": "success",
+        "result": {
+          "total_cost": 8,
+          "total_hours": 7,
+          "over_budget": false,
+          "over_deadline": false
+        },
+        "cost": 8,
+        "hours": 7,
+        "error": null
+      },
+      {
+        "id": "step_4",
         "name": "generate_script",
         "tool": "generate_script",
         "params": {
           "topic": "新品上线内容活动",
           "material_ids": [
-            "mat_premium"
+            "mat_standard"
           ]
         },
         "status": "success",
         "result": {
-          "script": "围绕「新品上线内容活动」的内容活动脚本，使用素材：高端定制素材",
+          "script": "围绕「新品上线内容活动」的内容活动脚本，使用素材：标准素材",
           "material_ids": [
-            "mat_premium"
+            "mat_standard"
           ]
         },
         "cost": 0.0,
@@ -81,38 +108,38 @@
         "error": null
       },
       {
-        "id": "step_4",
+        "id": "step_5",
         "name": "save_plan",
         "tool": "save_plan",
         "params": {
           "plan": {
             "topic": "新品上线内容活动",
             "material_ids": [
-              "mat_premium"
+              "mat_standard"
             ],
             "tool_ids": [
               "tool_script",
               "tool_design"
             ],
-            "total_cost": 12,
-            "total_hours": 9
+            "total_cost": 8,
+            "total_hours": 7
           }
         },
         "status": "success",
         "result": {
-          "plan_id": "17e2c195fa06",
+          "plan_id": "6355c9de11ba",
           "saved": true,
           "plan": {
             "topic": "新品上线内容活动",
             "material_ids": [
-              "mat_premium"
+              "mat_standard"
             ],
             "tool_ids": [
               "tool_script",
               "tool_design"
             ],
-            "total_cost": 12,
-            "total_hours": 9
+            "total_cost": 8,
+            "total_hours": 7
           }
         },
         "cost": 0.0,
@@ -139,7 +166,8 @@
       "tool": "estimate_cost",
       "args": {
         "material_ids": [
-          "mat_premium"
+          "mat_premium",
+          "mat_standard"
         ],
         "tool_ids": [
           "tool_script",
@@ -150,8 +178,29 @@
       },
       "ok": true,
       "summary": {
-        "total_cost": 12,
-        "total_hours": 9,
+        "total_cost": 17,
+        "total_hours": 13,
+        "over_budget": true,
+        "over_deadline": false
+      }
+    },
+    {
+      "tool": "estimate_cost",
+      "args": {
+        "material_ids": [
+          "mat_standard"
+        ],
+        "tool_ids": [
+          "tool_script",
+          "tool_design"
+        ],
+        "budget": 15,
+        "deadline_hours": 20
+      },
+      "ok": true,
+      "summary": {
+        "total_cost": 8,
+        "total_hours": 7,
         "over_budget": false,
         "over_deadline": false
       }
@@ -161,14 +210,14 @@
       "args": {
         "topic": "新品上线内容活动",
         "material_ids": [
-          "mat_premium"
+          "mat_standard"
         ]
       },
       "ok": true,
       "summary": {
-        "script": "围绕「新品上线内容活动」的内容活动脚本，使用素材：高端定制素材",
+        "script": "围绕「新品上线内容活动」的内容活动脚本，使用素材：标准素材",
         "material_ids": [
-          "mat_premium"
+          "mat_standard"
         ]
       }
     },
@@ -178,36 +227,36 @@
         "plan": {
           "topic": "新品上线内容活动",
           "material_ids": [
-            "mat_premium"
+            "mat_standard"
           ],
           "tool_ids": [
             "tool_script",
             "tool_design"
           ],
-          "total_cost": 12,
-          "total_hours": 9
+          "total_cost": 8,
+          "total_hours": 7
         }
       },
       "ok": true,
       "summary": {
-        "plan_id": "17e2c195fa06"
+        "plan_id": "6355c9de11ba"
       }
     }
   ],
-  "total_cost": 12,
-  "total_hours": 9,
+  "total_cost": 8,
+  "total_hours": 7,
   "saved_plan": {
-    "plan_id": "17e2c195fa06",
+    "plan_id": "6355c9de11ba",
     "topic": "新品上线内容活动",
     "material_ids": [
-      "mat_premium"
+      "mat_standard"
     ],
     "tool_ids": [
       "tool_script",
       "tool_design"
     ],
-    "total_cost": 12,
-    "total_hours": 9
+    "total_cost": 8,
+    "total_hours": 7
   },
   "reason": null,
   "trace": [
@@ -223,14 +272,15 @@
           "mat_standard"
         ]
       },
-      "decision": "继续下一步"
+      "decision": "先检索可用素材，确认素材成本与耗时后再筛选组合。"
     },
     {
       "step": 2,
       "action": "estimate_cost",
       "args": {
         "material_ids": [
-          "mat_premium"
+          "mat_premium",
+          "mat_standard"
         ],
         "tool_ids": [
           "tool_script",
@@ -240,51 +290,73 @@
         "deadline_hours": 20
       },
       "result_summary": {
-        "total_cost": 12,
-        "total_hours": 9,
-        "over_budget": false,
+        "total_cost": 17,
+        "total_hours": 13,
+        "over_budget": true,
         "over_deadline": false
       },
-      "decision": "预算内，准备保存"
+      "decision": "先估算双素材+脚本/设计工具的总费用与耗时，确认在预算15、20小时内可行后再生成脚本。"
     },
     {
       "step": 3,
+      "action": "estimate_cost",
+      "args": {
+        "material_ids": [
+          "mat_standard"
+        ],
+        "tool_ids": [
+          "tool_script",
+          "tool_design"
+        ],
+        "budget": 15,
+        "deadline_hours": 20
+      },
+      "result_summary": {
+        "total_cost": 8,
+        "total_hours": 7,
+        "over_budget": false,
+        "over_deadline": false
+      },
+      "decision": "双素材方案超预算，改用标准素材重新估算，确保费用控制在15以内。"
+    },
+    {
+      "step": 4,
       "action": "generate_script",
       "args": {
         "topic": "新品上线内容活动",
         "material_ids": [
-          "mat_premium"
+          "mat_standard"
         ]
       },
       "result_summary": {
-        "script": "围绕「新品上线内容活动」的内容活动脚本，使用素材：高端定制素材",
+        "script": "围绕「新品上线内容活动」的内容活动脚本，使用素材：标准素材",
         "material_ids": [
-          "mat_premium"
+          "mat_standard"
         ]
       },
-      "decision": "继续下一步"
+      "decision": "标准素材方案费用8、耗时7，均满足预算15和截止20小时，先为选用素材生成内容脚本。"
     },
     {
-      "step": 4,
+      "step": 5,
       "action": "save_plan",
       "args": {
         "plan": {
           "topic": "新品上线内容活动",
           "material_ids": [
-            "mat_premium"
+            "mat_standard"
           ],
           "tool_ids": [
             "tool_script",
             "tool_design"
           ],
-          "total_cost": 12,
-          "total_hours": 9
+          "total_cost": 8,
+          "total_hours": 7
         }
       },
       "result_summary": {
-        "plan_id": "17e2c195fa06"
+        "plan_id": "6355c9de11ba"
       },
-      "decision": "方案已保存"
+      "decision": "标准素材方案费用8≤预算15、耗时7≤截止20小时，且脚本已生成，保存该可行方案。"
     }
   ]
 }
