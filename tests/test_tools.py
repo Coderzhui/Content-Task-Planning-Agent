@@ -46,6 +46,13 @@ class ToolTests(unittest.TestCase):
         self.assertFalse(r["ok"])
         self.assertFalse(r["retryable"])
 
+    def test_estimate_missing_budget(self):
+        r = registry.execute("estimate_cost", {
+            "material_ids": ["mat_standard"], "tool_ids": ["tool_script", "tool_design"],
+        }, CATALOG, [], {})
+        self.assertFalse(r["ok"])
+        self.assertFalse(r["retryable"])
+
     def test_save_idempotent(self):
         plan = {"topic": "t", "material_ids": ["mat_standard"], "tool_ids": ["tool_script", "tool_design"]}
         r1 = registry.execute("save_plan", {"plan": plan}, CATALOG, [], {})

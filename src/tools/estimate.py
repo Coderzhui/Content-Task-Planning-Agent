@@ -8,6 +8,11 @@ def estimate_cost(args, catalog):
     budget = args.get("budget")
     deadline_hours = args.get("deadline_hours")
 
+    if not isinstance(budget, (int, float)) or isinstance(budget, bool):
+        return {"ok": False, "data": None, "error": "budget must be a number", "retryable": False}
+    if not isinstance(deadline_hours, (int, float)) or isinstance(deadline_hours, bool):
+        return {"ok": False, "data": None, "error": "deadline_hours must be a number", "retryable": False}
+
     try:
         mats = [catalog.get_material(mid) for mid in material_ids]
         tools = [catalog.get_tool(tid) for tid in tool_ids]

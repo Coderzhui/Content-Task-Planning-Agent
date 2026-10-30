@@ -3,7 +3,7 @@ import unittest
 from src.catalog import Catalog
 from src.agent import run_agent, summarize
 from src.state import State
-from src.models.base import Action
+from src.models.base import Action, Model
 from src.models.offline_mock import OfflineMockModel
 
 CATALOG = Catalog(
@@ -89,6 +89,21 @@ class AgentTests(unittest.TestCase):
         obs = summarize(s)
         self.assertNotIn("fail_injections", obs["input"])
         self.assertEqual(sorted(obs["input"].keys()), ["budget", "deadline_hours", "topic"])
+
+    def test_save_plan_missing_topic_no_crash(self):
+        r = run_agent(req(budget=15), SavePlanNoTopicModel(), CATALOG)
+        self.assertEqual(r["status"], "completed")
+        self.assertEqual(r["saved_plan"]["topic"], "新品上线")
+
+
+class SavePlanNoTopicModel(Model):
+    def decide(self, observation, tools_schema):
+        if not any(s["tool"] == "save_plan" for s in observation["steps"]):
+            return Action("tool", "save_plan", {"plan": {
+                "material_ids": ["mat_standard"],
+                "tool_ids": ["tool_script", "tool_design"],
+            }})
+        return Action("stop", reason="done")
 
 
 if __name__ == "__main__":

@@ -4,6 +4,7 @@ test_non_retryable_failure_stops (test_agent.AgentTests) ... ok
 test_normal_within_budget (test_agent.AgentTests) ... ok
 test_over_deadline_switches (test_agent.AgentTests) ... ok
 test_resume_skips_success_and_completes (test_agent.AgentTests) ... ok
+test_save_plan_missing_topic_no_crash (test_agent.AgentTests) ... ok
 test_step_limit (test_agent.AgentTests) ... ok
 test_summarize_hides_fail_injections (test_agent.AgentTests) ... ok
 test_tool_failure_retry_keeps_success (test_agent.AgentTests) ... ok
@@ -11,10 +12,14 @@ test_bad_json_file (test_cli.CliTests) ... ok
 test_missing_budget (test_cli.CliTests) ... ok
 test_normal (test_cli.CliTests) ... ok
 test_resume (test_cli.CliTests) ... ok
+test_parse_action_json_fence (test_llm.LLMTests) ... ok
+test_retries_on_429_then_succeeds (test_llm.LLMTests) ... ok
 test_checkpoint_roundtrip (test_state.StateTests) ... ok
 test_estimate_updates_step_cost (test_state.StateTests) ... ok
+test_load_checkpoint_missing_state (test_state.StateTests) ... ok
 test_record_success_and_failed (test_state.StateTests) ... ok
 test_roundtrip (test_state.StateTests) ... ok
+test_estimate_missing_budget (test_tools.ToolTests) ... ok
 test_estimate_premium_over_budget (test_tools.ToolTests) ... ok
 test_estimate_standard_within_budget (test_tools.ToolTests) ... ok
 test_estimate_unknown_id (test_tools.ToolTests) ... ok
@@ -29,6 +34,6 @@ test_not_dict (test_validate.ValidateTests) ... ok
 test_valid (test_validate.ValidateTests) ... ok
 
 ----------------------------------------------------------------------
-Ran 29 tests in 0.043s
+Ran 34 tests in 0.053s
 
 OK

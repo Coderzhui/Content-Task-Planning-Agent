@@ -1,3 +1,4 @@
+import json
 import os
 import tempfile
 import unittest
@@ -47,6 +48,16 @@ class StateTests(unittest.TestCase):
         self.assertEqual(s2.step_count, 1)
         self.assertEqual(s2.steps[0]["result"]["total_cost"], 8)
         self.assertEqual(cc["generate_script"], 1)
+
+    def test_load_checkpoint_missing_state(self):
+        with tempfile.NamedTemporaryFile("w", suffix=".json", delete=False, encoding="utf-8") as f:
+            json.dump({"call_counts": {}}, f)
+            path = f.name
+        try:
+            with self.assertRaises(ValueError):
+                load_checkpoint(path)
+        finally:
+            os.unlink(path)
 
 
 if __name__ == "__main__":

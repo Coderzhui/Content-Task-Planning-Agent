@@ -67,7 +67,7 @@ def run_agent(request, model, catalog, max_steps=MAX_STEPS, resume_state=None,
                 plan = data["plan"]
                 state.saved_plan = {
                     "plan_id": data["plan_id"],
-                    "topic": plan["topic"],
+                    "topic": plan.get("topic", state.input["topic"]),
                     "material_ids": plan.get("material_ids"),
                     "tool_ids": plan.get("tool_ids"),
                     "total_cost": state.total_cost,

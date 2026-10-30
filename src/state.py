@@ -67,15 +67,18 @@ class State:
 
     @classmethod
     def from_dict(cls, data):
-        state = cls(data["input"])
-        state.steps = data["steps"]
-        state.total_cost = data["total_cost"]
-        state.total_hours = data["total_hours"]
-        state.observations = data["observations"]
-        state.status = data["status"]
-        state.reason = data["reason"]
-        state.step_count = data["step_count"]
-        state.saved_plan = data.get("saved_plan")
+        try:
+            state = cls(data["input"])
+            state.steps = data["steps"]
+            state.total_cost = data["total_cost"]
+            state.total_hours = data["total_hours"]
+            state.observations = data["observations"]
+            state.status = data["status"]
+            state.reason = data["reason"]
+            state.step_count = data["step_count"]
+            state.saved_plan = data.get("saved_plan")
+        except (KeyError, TypeError) as exc:
+            raise ValueError(f"checkpoint state 缺少字段: {exc}") from exc
         return state
 
 
@@ -89,4 +92,6 @@ def save_checkpoint(path, state_dict, call_counts=None):
 def load_checkpoint(path):
     """从 checkpoint 恢复 (State, call_counts)。"""
     data = json.loads(Path(path).read_text(encoding="utf-8"))
+    if not isinstance(data, dict) or "state" not in data:
+        raise ValueError("checkpoint 缺少 state 字段")
     return State.from_dict(data["state"]), data.get("call_counts", {})
