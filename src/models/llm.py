@@ -15,7 +15,7 @@ SYSTEM_PROMPT = (
     "你是内容活动规划助手。你只能使用给定工具，逐步完成方案规划。"
     "只用给定素材与工具，不编造数字。必须在预算与截止时间内完成；"
     "工具失败时调整动作（可重试一次或换方案），已成功步骤的结果必须保留，失败步骤不得记为成功。"
-    "每次只输出一个 JSON 动作：{\"action\": \"工具名\", \"args\": {...}} 或 {\"action\": \"stop\", \"reason\": \"...\"}。"
+    "每次只输出一个 JSON 动作：{\"action\": \"工具名\", \"args\": {...}, \"reason\": \"简短决策理由\"} 或 {\"action\": \"stop\", \"reason\": \"...\"}。"
 )
 
 
@@ -75,4 +75,4 @@ class LLMModel(Model):
             return Action("stop", reason=data.get("reason", "completed"))
         if action is None:
             raise ValueError("LLM 输出缺少 action 字段")
-        return Action("tool", action, data.get("args", {}))
+        return Action("tool", action, data.get("args", {}), reason=data.get("reason"))

@@ -95,6 +95,11 @@ class AgentTests(unittest.TestCase):
         self.assertEqual(r["status"], "completed")
         self.assertEqual(r["saved_plan"]["topic"], "新品上线")
 
+    def test_trace_decision_uses_model_reason(self):
+        r = run_agent(req(budget=15), ReasonModel(), CATALOG)
+        self.assertEqual(r["trace"][0]["decision"], "先检索可用素材")
+        self.assertEqual(r["trace"][1]["decision"], "预算内，准备保存方案")
+
 
 class SavePlanNoTopicModel(Model):
     def decide(self, observation, tools_schema):
@@ -103,6 +108,19 @@ class SavePlanNoTopicModel(Model):
                 "material_ids": ["mat_standard"],
                 "tool_ids": ["tool_script", "tool_design"],
             }})
+        return Action("stop", reason="done")
+
+
+class ReasonModel(Model):
+    def decide(self, observation, tools_schema):
+        steps = observation["steps"]
+        if not any(s["tool"] == "search_material" for s in steps):
+            return Action("tool", "search_material", {"topic": "新品上线"}, reason="先检索可用素材")
+        if not any(s["tool"] == "save_plan" for s in steps):
+            return Action("tool", "save_plan", {"plan": {
+                "topic": "新品上线", "material_ids": ["mat_standard"],
+                "tool_ids": ["tool_script", "tool_design"],
+            }}, reason="预算内，准备保存方案")
         return Action("stop", reason="done")
 
 

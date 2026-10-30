@@ -49,6 +49,7 @@ class State:
             "data": result.get("data"),
             "error": result.get("error"),
             "retryable": result.get("retryable"),
+            "reason": action.reason,
         })
         self.step_count += 1
 

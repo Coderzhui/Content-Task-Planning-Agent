@@ -8,11 +8,13 @@ test_save_plan_missing_topic_no_crash (test_agent.AgentTests) ... ok
 test_step_limit (test_agent.AgentTests) ... ok
 test_summarize_hides_fail_injections (test_agent.AgentTests) ... ok
 test_tool_failure_retry_keeps_success (test_agent.AgentTests) ... ok
+test_trace_decision_uses_model_reason (test_agent.AgentTests) ... ok
 test_bad_json_file (test_cli.CliTests) ... ok
 test_missing_budget (test_cli.CliTests) ... ok
 test_normal (test_cli.CliTests) ... ok
 test_resume (test_cli.CliTests) ... ok
 test_parse_action_json_fence (test_llm.LLMTests) ... ok
+test_parse_action_reason (test_llm.LLMTests) ... ok
 test_retries_on_429_then_succeeds (test_llm.LLMTests) ... ok
 test_checkpoint_roundtrip (test_state.StateTests) ... ok
 test_estimate_updates_step_cost (test_state.StateTests) ... ok
@@ -34,6 +36,6 @@ test_not_dict (test_validate.ValidateTests) ... ok
 test_valid (test_validate.ValidateTests) ... ok
 
 ----------------------------------------------------------------------
-Ran 34 tests in 0.053s
+Ran 36 tests in 0.054s
 
 OK

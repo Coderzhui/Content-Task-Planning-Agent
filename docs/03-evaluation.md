@@ -2,7 +2,7 @@
 
 运行记录见 [test-results](../examples/test-results.txt)；输入/输出/ Trace 见 [examples/](../examples/)。
 
-自动化测试共 **34 项，全部通过**（`python -m unittest discover -s tests -v`）。
+自动化测试共 **36 项，全部通过**（`python -m unittest discover -s tests -v`）。
 
 ## 用例与验收点对照
 

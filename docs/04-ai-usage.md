@@ -7,7 +7,7 @@
 | 阶段 | AI 贡献 | 验证方式 |
 |---|---|---|
 | 需求/方案/计划 | 起草 `ANALYSIS.md`、`docs/02-solution.md`、`PLAN.md` | 对照 `question.md` 检查需求与验收点覆盖 |
-| 代码 | 实现 `src/`（校验/目录/状态/工具/模型双入口/ReAct 引擎/CLI，含 `--resume` 续跑） | 34 项 unittest 全部通过 |
+| 代码 | 实现 `src/`（校验/目录/状态/工具/模型双入口/ReAct 引擎/CLI，含 `--resume` 续跑） | 36 项 unittest 全部通过 |
 | 测试 | 生成 tests/* 与多组 examples 输入/输出 | `python -m unittest discover -s tests -v` |
 | 结果 | 写入实际运行输出与 `test-results.txt` | 与输入逐项对应 |
 
@@ -30,7 +30,7 @@
 
 | 改动 | 原因 | 验证 |
 |---|---|---|
-| `summarize()` 只暴露业务字段 | AI 初稿把整个 `state.input`（含 `fail_injections` 测试注入项）喂给模型，会向真实 LLM 泄露测试细节 | 手写过滤为 `topic/budget/deadline_hours`；新增 `test_summarize_hides_fail_injections`，34 项测试通过 |
+| `summarize()` 只暴露业务字段 | AI 初稿把整个 `state.input`（含 `fail_injections` 测试注入项）喂给模型，会向真实 LLM 泄露测试细节 | 手写过滤为 `topic/budget/deadline_hours`；新增 `test_summarize_hides_fail_injections`，36 项测试通过 |
 
 ## 验证结论
 

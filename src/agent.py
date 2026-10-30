@@ -123,6 +123,8 @@ def _summary(obs):
 
 
 def _decision(obs):
+    if obs.get("reason"):
+        return obs["reason"]
     if not obs["ok"]:
         return "工具失败，重试或停止"
     if obs["tool"] == "estimate_cost":

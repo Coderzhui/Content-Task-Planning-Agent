@@ -51,6 +51,13 @@ class LLMTests(unittest.TestCase):
         self.assertEqual(action.tool, "search_material")
         self.assertEqual(action.args, {"topic": "t"})
 
+    def test_parse_action_reason(self):
+        model = LLMModel(base_url="http://x", api_key="k", model="m")
+        action = model._parse_action('{"action":"estimate_cost","args":{"material_ids":["mat_standard"]},"reason":"改用更低成本素材"}')
+        self.assertEqual(action.kind, "tool")
+        self.assertEqual(action.tool, "estimate_cost")
+        self.assertEqual(action.reason, "改用更低成本素材")
+
 
 if __name__ == "__main__":
     unittest.main()
