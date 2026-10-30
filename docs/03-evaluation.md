@@ -41,7 +41,18 @@
 | `over-deadline` | completed，total_cost=8（standard） | 高端 9h 超截止 → 改标准 7h |
 | `tool-failure` | completed，total_cost=8 | 先估算两素材=17 超预算→改选 standard=8；generate 注入失败→重试成功，保留成功步骤 |
 
+## 多模型决策一致性
+
+`deepseek-flash`（DeepSeek 官方）与 `deepseek-v4.1-flash`（火山引擎）在 4 个场景下**最终决策一致**，运行记录见 `examples/llm-*.output.json` 与 `examples/llm-volc-*.output.json`：
+
+| 场景 | deepseek-flash | deepseek-v4.1-flash | 一致 |
+|---|---|---|---|
+| normal | premium=12 | premium=12 | ✅ |
+| budget-overrun | standard=8 | standard=8 | ✅ |
+| tool-failure | standard=8（失败重试） | standard=8（失败重试） | ✅ |
+| over-deadline | standard=8（超截止改选） | standard=8（超截止改选） | ✅ |
+
 ## 已知限制
 
-- 真实 LLM 已通过 DeepSeek 实跑验证（见上表）；本页离线 Mock 用例用于确定性复现流程与状态机制。
+- 真实 LLM 已通过 DeepSeek 家族两个模型实跑验证（见上表）；本页离线 Mock 用例用于确定性复现流程与状态机制。
 - 失败步骤续跑已通过 `--checkpoint` / `--resume` 实现；示例与运行记录见 `examples/resume.*`。
